@@ -2,7 +2,7 @@ import gleam/http.{Get}
 import gleam/string_builder
 import wisp.{type Request}
 
-pub fn devices_api(req: Request) {
+pub fn handle_request(req: Request) {
   case req.method {
     http.Get -> get_devices()
     _ -> wisp.method_not_allowed([Get])

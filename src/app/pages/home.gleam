@@ -2,8 +2,8 @@ import nakai/attr
 import nakai/html
 
 pub fn home() {
-  html.h1([], [
-    html.h1_text([], "H1 Open Sesame"),
+  html.section([], [
+    html.h1_text([], "Open Sesame"),
     html.div([], [
       html.p_text([attr.id("hello-text")], "Hello, world!"),
       html.button_text(

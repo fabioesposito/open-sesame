@@ -1,4 +1,5 @@
-import app/api/devices.{devices_api}
+import app/api/auth
+import app/api/devices
 import app/layout
 import app/middleware
 import app/pages/home.{home}
@@ -9,10 +10,15 @@ pub fn handle_request(req: Request) -> Response {
   use req <- middleware.middleware(req)
 
   case wisp.path_segments(req) {
+    // Html
     [] -> layout.render_page(home())
-    // TODO make partials dynamic
     ["partials", "hello-text"] -> layout.render_partial(hello())
-    ["api", "devices"] -> devices_api(req)
+
+    // API
+    ["api", "login"] -> auth.handle_login(req)
+    ["api", "logout"] -> auth.handle_logout(req)
+    ["api", "devices"] -> devices.handle_request(req)
+
     _ -> wisp.not_found()
   }
 }
